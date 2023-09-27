@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EIMS.CoreBusiness\EIMS.CoreBusiness.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EIMS.UseCases\EIMS.UseCases.csproj" />
   </ItemGroup>
 
 </Project>
