@@ -22,5 +22,11 @@ namespace EIMS.Plugins.EFCore
         {
             return await _db.Inventories.Where(x => x.InventoryName.Contains(name, StringComparison.OrdinalIgnoreCase) || string.IsNullOrWhiteSpace(name)).ToListAsync();
         }
+
+        public async Task AddInventoryAsync(Inventory inventory)
+        {
+            _db.Inventories.Add(inventory);
+            await _db.SaveChangesAsync();
+        }
     }
 }
