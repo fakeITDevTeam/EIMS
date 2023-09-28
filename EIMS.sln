@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIMS.WebApp", "EIMS.WebApp\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIMS.UseCases", "EIMS.UseCases\EIMS.UseCases.csproj", "{6C07C49B-115E-4AF4-88DB-EB5A8FBC339C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIMS.CoreBusiness", "EIMS.CoreBusiness\EIMS.CoreBusiness.csproj", "{02667E2B-496F-4AAD-9E30-7A2F245C96FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIMS.CoreBusiness", "EIMS.CoreBusiness\EIMS.CoreBusiness.csproj", "{02667E2B-496F-4AAD-9E30-7A2F245C96FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIMS.Plugins.EFCore", "EIMS.Plugins.EFCore\EIMS.Plugins.EFCore.csproj", "{0149C227-6A2E-4E1B-B2E5-782EAC186A9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIMS.Plugins.EFCore", "EIMS.Plugins.EFCore\EIMS.Plugins.EFCore.csproj", "{0149C227-6A2E-4E1B-B2E5-782EAC186A9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
