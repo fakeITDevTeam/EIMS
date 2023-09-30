@@ -27,7 +27,7 @@
                     <td>@inv.Quantity</td>
                     <td>@inv.Price</td>
                     <td>
-                        <button type="button" class="btn btn-light">Edit</button>
+                        <button type="button" class="btn btn-light" @onclick="@(()=>EditInventory(inv.InventoryId))">Edit</button>
                     </td>
                 </tr>
             }
@@ -55,5 +55,10 @@
     private void AddInventory()
     {
         NavigationManager.NavigateTo("/addinventory");
+    }
+
+    private void EditInventory(int invId)
+    {
+        NavigationManager.NavigateTo($"/editinventory/{invId}");
     }
 }
