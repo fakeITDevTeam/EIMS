@@ -2,20 +2,20 @@
 using EIMS.UseCases.Interfaces;
 using EIMS.UseCases.PluginInterfaces;
 
-namespace EIMS.UseCases
+namespace EIMS.UseCases.Inventories
 {
     public class ViewInventoriesByNameUseCase: IViewInventoriesByNameUseCase
     {
-        private readonly IInventoryRepository inventoryRepository;
+        private readonly IInventoryRepository _inventoryRepository;
 
         public ViewInventoriesByNameUseCase(IInventoryRepository inventoryRepository)
         {
-            this.inventoryRepository = inventoryRepository;
+            _inventoryRepository = inventoryRepository;
         }
 
         public async Task<IEnumerable<Inventory>> ExecuteAsync(string name = "")
         {
-            return await this.inventoryRepository.GetInventoriesByName(name);
+            return await _inventoryRepository.GetInventoriesByName(name);
         }
     }
 }

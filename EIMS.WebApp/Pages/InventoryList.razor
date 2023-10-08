@@ -8,7 +8,7 @@
 
 <ViewInventoriesComponent OnSearchInventories="OnSearchInventories"></ViewInventoriesComponent>
 
-@if (listInventories != null)
+@if (_listInventories != null)
 {
     <table class="table">
         <thead>
@@ -20,16 +20,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var inv in this.listInventories)
+            @foreach (var inv in _listInventories)
             {
-                <tr>
-                    <td>@inv.InventoryName</td>
-                    <td>@inv.Quantity</td>
-                    <td>@inv.Price</td>
-                    <td>
-                        <button type="button" class="btn btn-light" @onclick="@(()=>EditInventory(inv.InventoryId))">Edit</button>
-                    </td>
-                </tr>
+                <InventoryItemComponent Inventory="inv"></InventoryItemComponent>
             }
         </tbody>
     </table>
@@ -39,26 +32,22 @@
 <button type="button" class="btn btn-primary" @onclick="AddInventory">Add Inventory</button>
 
 @code {
-    private List<Inventory> listInventories;
-
+    private List<Inventory>? _listInventories;
+    
     protected override async Task OnInitializedAsync()    
     {
         var invs = await ViewInventoriesByNameUseCase.ExecuteAsync("");
-        listInventories = invs.ToList();
+        _listInventories = invs.ToList();
     }
 
     private void OnSearchInventories(List<Inventory> inventories)
     {
-        listInventories = inventories;
+        _listInventories = inventories;
     }
 
     private void AddInventory()
     {
         NavigationManager.NavigateTo("/addinventory");
-    }
-
-    private void EditInventory(int invId)
-    {
-        NavigationManager.NavigateTo($"/editinventory/{invId}");
-    }
+    }   
+        
 }
