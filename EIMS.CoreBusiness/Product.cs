@@ -21,5 +21,16 @@ namespace EIMS.CoreBusiness
         public double Price { get; set; }
 
         public List<ProductInventory>? ProductInventories { get; set; }
+
+        public bool ValidatePricing()
+        {
+            if (ProductInventories == null || ProductInventories.Count <= 0) return true;
+
+            double priceOfAllInvs = ProductInventories.Sum(x => x.Inventory?.Price ?? 0);
+
+            if (priceOfAllInvs < Price) return true;
+
+            return true;
+        }
     }
 }

@@ -9,7 +9,7 @@
 
 @if (_product != null)
 {
-    <EditForm Model="_product" OnInvalidSubmit="OnValidSubmit">
+    <EditForm Model="_product" OnValidSubmit="OnValidSubmit">
         <DataAnnotationsValidator></DataAnnotationsValidator>
         <ValidationSummary></ValidationSummary>
 
@@ -30,7 +30,7 @@
         
         <ProductInventoriesComponent @ref="productInventoriesComponent"></ProductInventoriesComponent>
 
-        <br>
+        <br />
         <button type="submit" class="btn btn-primary">Save</button>
     </EditForm>
 }
@@ -50,7 +50,13 @@
     private async Task OnValidSubmit()
     {
         if (_product != null)
-        {            
+        {
+            productInventoriesComponent._productInventories.ForEach(x =>
+            {
+                x.ProductId = _product.ProductId;    
+            });
+            _product.ProductInventories = productInventoriesComponent._productInventories;
+
             await AddProductUseCase.ExecuteAsync(_product);
             NavigationManager.NavigateTo("/products");
         }

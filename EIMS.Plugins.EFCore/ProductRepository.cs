@@ -26,7 +26,7 @@ namespace EIMS.Plugins.EFCore
             }
 
             _db.Products.Add(product);
-            await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();                        
         }
 
         public async Task<List<Product>> GetProductsByName(string name)
