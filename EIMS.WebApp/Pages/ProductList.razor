@@ -34,6 +34,12 @@
 @code {
     private List<Product>? _listProducts;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var prods = await ViewProductsByNameUseCase.ExecuteASync("");
+        _listProducts = prods.ToList();
+    }
+
     private void OnSearchProducts(List<Product> listProducts)
     {
         _listProducts = listProducts;

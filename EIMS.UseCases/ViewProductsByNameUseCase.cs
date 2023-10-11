@@ -1,11 +1,6 @@
 ﻿using EIMS.CoreBusiness;
 using EIMS.UseCases.Interfaces;
 using EIMS.UseCases.PluginInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EIMS.UseCases
 {
@@ -18,11 +13,14 @@ namespace EIMS.UseCases
             _productRepository = productRepository;
         }
 
-        public async Task<List<Product>> ExecuteASync(string name = "")
+        //public async Task<List<Product>> ExecuteASync(string name = "")
+        //{
+        //    return await _productRepository.GetProductsByName(name);
+        //}
+
+        public async Task<IEnumerable<Product>> ExecuteASync(string name = "")
         {
             return await _productRepository.GetProductsByName(name);
         }
-
-
     }
 }

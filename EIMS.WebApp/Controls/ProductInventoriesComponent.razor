@@ -19,8 +19,11 @@
             @foreach (var productInventory in _productInventories)
             {
                 <tr>
-                    <td>@productInventory.Inventory.InventoryName &nbsp; </td>
-                    <td><input type="number" min="0" max="@productInventory.Inventory.Quantity" @bind-value="productInventory.InventoryQuantity" /> </td>
+                    <td>@productInventory.Inventory.InventoryName &nbsp; </td>                    
+                    <td>
+                        <input type="number" min="0" @bind-value="productInventory.InventoryQuantity" 
+                            @bind-value:event="oninput" @onchange="OnInventoryQtyChanged" /> 
+                    </td>
                     <td><button class="btn btn-link" type="button" @onclick="@(()=>RemoveInventory(productInventory))">Remove</button></td>
                 </tr>
             }
@@ -30,14 +33,24 @@
 
 
 @code {
+    [Parameter]
+    public EventCallback<List<ProductInventory>> OnInventorySelected { get; set; }
+
     public List<ProductInventory> _productInventories = new List<ProductInventory>();
 
-    private void OnSelectInventory(Inventory inventory)
+    private async Task OnInventoryQtyChanged()
+    {
+        await OnInventorySelected.InvokeAsync(_productInventories);
+    }
+
+    private async Task OnSelectInventory(Inventory inventory)
     {
         if (!_productInventories.Any(x => x.Inventory.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
         {
             _productInventories.Add(new ProductInventory { InventoryId = inventory.InventoryId, Inventory = inventory});
         }
+
+        await OnInventorySelected.InvokeAsync(_productInventories);
     }
 
     private void RemoveInventory(ProductInventory productInventory)
