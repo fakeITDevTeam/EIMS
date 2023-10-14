@@ -1,8 +1,8 @@
 using EIMS.Plugins.EFCore;
-using EIMS.UseCases;
 using EIMS.UseCases.Interfaces;
 using EIMS.UseCases.Inventories;
 using EIMS.UseCases.PluginInterfaces;
+using EIMS.UseCases.Products;
 using EIMS.WebApp.Areas.Identity;
 using EIMS.WebApp.Data;
 using Microsoft.AspNetCore.Components;
@@ -41,6 +41,7 @@ builder.Services.AddTransient<IViewProductsByNameUseCase, ViewProductsByNameUseC
 builder.Services.AddTransient<IAddProductUseCase, AddProductUseCase>();
 builder.Services.AddTransient<IViewProductByIdUseCase, ViewProductByIdUseCase>();
 builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
+builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
 
 var app = builder.Build();
 

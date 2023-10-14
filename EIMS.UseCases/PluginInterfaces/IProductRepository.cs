@@ -16,5 +16,7 @@ namespace EIMS.UseCases.PluginInterfaces
         Task<Product> GetProductByIdAsync(int productId);
 
         Task UpdateProductAsync(Product product);
+
+        Task DeleteProductAsync(int productId);
     }
 }

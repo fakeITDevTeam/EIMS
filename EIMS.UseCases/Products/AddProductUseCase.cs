@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EIMS.UseCases
+namespace EIMS.UseCases.Products
 {
     public class AddProductUseCase : IAddProductUseCase
     {

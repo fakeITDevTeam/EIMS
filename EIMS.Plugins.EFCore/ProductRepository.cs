@@ -29,6 +29,17 @@ namespace EIMS.Plugins.EFCore
             await _db.SaveChangesAsync();                        
         }
 
+        public async Task DeleteProductAsync(int productId)
+        {
+            var product = await _db.Products.FindAsync(productId);
+
+            if (product != null)
+            {
+                product.IsActive = false;
+                await _db.SaveChangesAsync();
+            }
+        }
+
         public async Task<Product> GetProductByIdAsync(int productId)
         {
             return await _db.Products.Include(x => x.ProductInventories).ThenInclude(x => x.Inventory).FirstOrDefaultAsync(x => x.ProductId == productId);
@@ -36,7 +47,7 @@ namespace EIMS.Plugins.EFCore
 
         public async Task<List<Product>> GetProductsByNameAsync(string name)
         {
-            return await _db.Products.Where(x => x.ProductName.Contains(name, StringComparison.OrdinalIgnoreCase) || string.IsNullOrWhiteSpace(name)).ToListAsync();
+            return await _db.Products.Where(x => (x.ProductName.Contains(name, StringComparison.OrdinalIgnoreCase) || string.IsNullOrWhiteSpace(name)) && x.IsActive == true).ToListAsync();
         }
 
         public async Task UpdateProductAsync(Product product)

@@ -2,7 +2,7 @@
 using EIMS.UseCases.Interfaces;
 using EIMS.UseCases.PluginInterfaces;
 
-namespace EIMS.UseCases
+namespace EIMS.UseCases.Products
 {
     public class ViewProductsByNameUseCase : IViewProductsByNameUseCase
     {
