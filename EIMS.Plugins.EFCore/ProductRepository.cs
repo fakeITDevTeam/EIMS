@@ -29,9 +29,31 @@ namespace EIMS.Plugins.EFCore
             await _db.SaveChangesAsync();                        
         }
 
-        public async Task<List<Product>> GetProductsByName(string name)
+        public async Task<Product> GetProductByIdAsync(int productId)
+        {
+            return await _db.Products.Include(x => x.ProductInventories).ThenInclude(x => x.Inventory).FirstOrDefaultAsync(x => x.ProductId == productId);
+        }
+
+        public async Task<List<Product>> GetProductsByNameAsync(string name)
         {
             return await _db.Products.Where(x => x.ProductName.Contains(name, StringComparison.OrdinalIgnoreCase) || string.IsNullOrWhiteSpace(name)).ToListAsync();
+        }
+
+        public async Task UpdateProductAsync(Product product)
+        {
+            if (_db.Products.Any(x => x.ProductName.Equals(product.ProductName, StringComparison.OrdinalIgnoreCase))) return;
+
+            var vProduct = await _db.Products.FindAsync(product.ProductId);
+
+            if (vProduct != null)
+            {
+                vProduct.ProductName = product.ProductName;
+                vProduct.Price = product.Price;
+                vProduct.Quantity = product.Quantity;
+                vProduct.ProductInventories = product.ProductInventories;
+
+                await _db.SaveChangesAsync();
+            }
         }
     }
 }

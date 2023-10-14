@@ -33,10 +33,12 @@
 
 
 @code {
+
     [Parameter]
     public EventCallback<List<ProductInventory>> OnInventorySelected { get; set; }
 
-    public List<ProductInventory> _productInventories = new List<ProductInventory>();
+    [Parameter]
+    public List<ProductInventory> _productInventories { get; set; } = new List<ProductInventory>();
 
     private async Task OnInventoryQtyChanged()
     {

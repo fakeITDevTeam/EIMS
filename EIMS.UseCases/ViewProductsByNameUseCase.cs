@@ -20,7 +20,7 @@ namespace EIMS.UseCases
 
         public async Task<IEnumerable<Product>> ExecuteASync(string name = "")
         {
-            return await _productRepository.GetProductsByName(name);
+            return await _productRepository.GetProductsByNameAsync(name);
         }
     }
 }
