@@ -10,14 +10,18 @@ namespace EIMS.Plugins.EFCore
 {
     public class EIMSContext: DbContext
     {
+        public EIMSContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
         public DbSet<Inventory> Inventories { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
-        public EIMSContext(DbContextOptions options): base(options)
-        {
+        public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
 
-        }
+        public DbSet<ProductTransaction> ProductTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
