@@ -34,12 +34,12 @@ namespace EIMS.Plugins.EFCore
 
             // seeding data
             modelBuilder.Entity<Inventory>().HasData(
-                new Inventory { InventoryId = 1, InventoryName = "Gas Engine", Price = 1000, Quantity = 1 },
-                new Inventory { InventoryId = 2, InventoryName = "Body", Price = 400, Quantity = 1 },
-                new Inventory { InventoryId = 3, InventoryName = "Wheels", Price = 100, Quantity = 1 },
-                new Inventory { InventoryId = 4, InventoryName = "Seat", Price = 50, Quantity = 5 },
-                new Inventory { InventoryId = 5, InventoryName = "Electric Engine", Price = 8000, Quantity = 3 },
-                new Inventory { InventoryId = 6, InventoryName = "Battery", Price = 400, Quantity = 5 }
+                new Inventory { InventoryId = 1, InventoryName = "Gas Engine", Price = 1000, Quantity = 100 },
+                new Inventory { InventoryId = 2, InventoryName = "Body", Price = 400, Quantity = 200 },
+                new Inventory { InventoryId = 3, InventoryName = "Wheels", Price = 100, Quantity = 800 },
+                new Inventory { InventoryId = 4, InventoryName = "Seat", Price = 50, Quantity = 1000 },
+                new Inventory { InventoryId = 5, InventoryName = "Electric Engine", Price = 8000, Quantity = 100 },
+                new Inventory { InventoryId = 6, InventoryName = "Battery", Price = 400, Quantity = 100 }
             );
 
             modelBuilder.Entity<Product>().HasData(

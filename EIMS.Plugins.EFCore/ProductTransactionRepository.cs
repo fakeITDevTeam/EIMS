@@ -30,7 +30,8 @@ namespace EIMS.Plugins.EFCore
             {
                 foreach (var pi in prod.ProductInventories)
                 {
-                    pi.Inventory.Quantity -= quantity *= pi.InventoryQuantity;
+                    //pi.Inventory.Quantity -= quantity *= pi.InventoryQuantity;
+                    pi.Inventory.Quantity -= quantity * pi.InventoryQuantity;
                 }
             }
 

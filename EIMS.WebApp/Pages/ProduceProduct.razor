@@ -5,6 +5,8 @@
 
 @using EIMS.WebApp.ViewModels;
 
+<ErrorMessageComponent ErrorMessage="@errorMessage"></ErrorMessageComponent>
+
 <h3>Produce Product</h3>
 
 <br />
@@ -44,12 +46,19 @@
 
     private ProduceViewModel produceViewModel = new ProduceViewModel();
     private Product selectedProduct;
+    private string errorMessage;
 
     private async Task OnValidSubmit()
     {
         if (!await ValidateEnoughInventoriesForProductingUseCase.ExecuteAsync(selectedProduct, produceViewModel.QuantityToProduce))
         {
+            errorMessage = $"The inventories are not enough for producing the product {selectedProduct.ProductName} x {produceViewModel.QuantityToProduce} times";
+
             return;    
+        }
+        else
+        {
+            errorMessage = string.Empty;
         }
 
         await ProduceProductUseCase.ExecuteAsync(
