@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EIMS.UseCases
+namespace EIMS.UseCases.Activities
 {
     public class PurchaseInventoryUseCase : IPurchaseInventoryUseCase
     {
@@ -18,7 +18,7 @@ namespace EIMS.UseCases
         {
             _inventoryTransactionRepository = inventoryTransactionRepository;
             _inventoryRepository = inventoryRepository;
-        }        
+        }
 
         public async Task ExecuteAsync(string poNumber, Inventory inventory, int quantity, string doneBy)
         {

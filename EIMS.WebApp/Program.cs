@@ -1,9 +1,11 @@
 using EIMS.Plugins.EFCore;
-using EIMS.UseCases;
+using EIMS.UseCases.Activities;
 using EIMS.UseCases.Interfaces;
 using EIMS.UseCases.Inventories;
 using EIMS.UseCases.PluginInterfaces;
 using EIMS.UseCases.Products;
+using EIMS.UseCases.Reports;
+using EIMS.UseCases.Validations;
 using EIMS.WebApp.Areas.Identity;
 using EIMS.WebApp.Data;
 using Microsoft.AspNetCore.Components;
@@ -49,6 +51,7 @@ builder.Services.AddTransient<IPurchaseInventoryUseCase, PurchaseInventoryUseCas
 builder.Services.AddTransient<IValidateEnoughInventoriesForProductingUseCase, ValidateEnoughInventoriesForProductingUseCase>();
 builder.Services.AddTransient<IProduceProductUseCase, ProduceProductUseCase>();
 builder.Services.AddTransient<ISellProductUseCase, SellProductUseCase>();
+builder.Services.AddTransient<ISearchInventoryTransactionsUseCase, SearchInventoryTransactionsUseCase>();
 
 var app = builder.Build();
 

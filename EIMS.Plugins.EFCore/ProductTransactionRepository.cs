@@ -23,18 +23,28 @@ namespace EIMS.Plugins.EFCore
         public async Task ProduceAsync(string productionNumber, Product product, int quantity, double price, string doneBy)
         {
             var prod = await _productRepository.GetProductByIdAsync(product.ProductId);
-
-            //var prod = await _db.Products.Include(x => x.ProductInventories).ThenInclude(x => x.Inventory).FirstOrDefaultAsync(x => x.ProductId == product.ProductId);
-
+            
             if (prod != null)
             {
                 foreach (var pi in prod.ProductInventories)
                 {
-                    //pi.Inventory.Quantity -= quantity *= pi.InventoryQuantity;
+                    int qtyBefore = pi.Inventory.Quantity;
                     pi.Inventory.Quantity -= quantity * pi.InventoryQuantity;
+
+                    _db.InventoryTransactions.Add(new InventoryTransaction
+                    {
+                        ProductionNumber = productionNumber,
+                        InventoryId = pi.Inventory.InventoryId,
+                        QuantityBefore = qtyBefore,
+                        ActivityType = InventoryTransactionType.ProduceProduct,
+                        QuantityAfter = pi.Inventory.Quantity,
+                        TransactionDate = DateTime.Now,
+                        DoneBy = doneBy,
+                        UnitPrice = price
+                    });
                 }
             }
-
+            
             _db.ProductTransactions.Add(new ProductTransaction
             {
                 ProductionNumber = productionNumber,

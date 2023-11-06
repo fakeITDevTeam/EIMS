@@ -1,6 +1,6 @@
 ﻿using EIMS.CoreBusiness;
 
-namespace EIMS.UseCases
+namespace EIMS.UseCases.Interfaces
 {
     public interface ISellProductUseCase
     {
