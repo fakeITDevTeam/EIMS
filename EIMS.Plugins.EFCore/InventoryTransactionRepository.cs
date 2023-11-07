@@ -24,10 +24,13 @@ namespace EIMS.Plugins.EFCore
             DateTime? dateTo, 
             InventoryTransactionType? transactionType)
         {
+            if (dateTo.HasValue) dateTo = dateTo.Value.AddDays(1);
+
             var query = from it in _db.InventoryTransactions join inv in _db.Inventories on it.InventoryId equals inv.InventoryId
                         where 
                             (string.IsNullOrWhiteSpace(inventoryName) || inv.InventoryName.Contains(inventoryName, StringComparison.OrdinalIgnoreCase)) &&
-                            (!dateFrom.HasValue || it.TransactionDate >= dateFrom.Value.Date) && (!dateTo.HasValue || it.TransactionDate <= dateTo.Value.Date) &&
+                            (!dateFrom.HasValue || it.TransactionDate >= dateFrom.Value.Date) && 
+                            (!dateTo.HasValue || it.TransactionDate <= dateTo.Value.Date) &&
                             (!transactionType.HasValue || it.ActivityType == transactionType)
                         select it;
 

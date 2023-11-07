@@ -20,6 +20,26 @@ namespace EIMS.Plugins.EFCore
             _productRepository = productRepository;
         }
 
+        public async Task<IEnumerable<ProductTransaction>> GetProductTransactionAsync(
+            string productName,
+            DateTime? dateFrom,
+            DateTime? dateTo,
+            ProductTransactionType? transactionType)
+        {
+            if (dateTo.HasValue) dateTo = dateTo.Value.AddDays(1);
+
+            var query = from pt in _db.ProductTransactions
+                        join prod in _db.Products on pt.ProductId equals prod.ProductId
+                        where
+                            (string.IsNullOrWhiteSpace(productName) || prod.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase)) &&
+                            (!dateFrom.HasValue || pt.TransactionDate >= dateFrom.Value.Date) &&
+                            (!dateTo.HasValue || pt.TransactionDate <= dateTo.Value.Date) &&
+                            (!transactionType.HasValue || pt.ActivityType == transactionType)
+                        select pt;
+
+            return await query.Include(x => x.Product).ToListAsync();
+        }
+
         public async Task ProduceAsync(string productionNumber, Product product, int quantity, double price, string doneBy)
         {
             var prod = await _productRepository.GetProductByIdAsync(product.ProductId);
@@ -70,7 +90,8 @@ namespace EIMS.Plugins.EFCore
                 QuantityAfter = product.Quantity - quantity,
                 TransactionDate = DateTime.Now,
                 DoneBy = doneBy,
-                UnitPrice = price
+                UnitPrice = price,
+                ActivityType = ProductTransactionType.SellProduct
             });
 
             await _db.SaveChangesAsync();

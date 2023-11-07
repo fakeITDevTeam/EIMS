@@ -21,11 +21,10 @@
     </div>
     <div class="col">
         <label for="inv">Activity Type</label>
-
         <select id="at" class="form-control" @bind="activityTypeId">
             <option value="0"></option>
             <option value="1">Purchase Inventory</option>
-            <option value="2">Product Product</option>
+            <option value="2">Produce Product</option>
         </select>
     </div>
     <div class="col">
@@ -89,4 +88,3 @@
         inventoryTransactions = await SearchInventoryTransactionsUseCase.ExecuteAsync(invName, dateFrom, dateTo, inventoryTransactionType);
     }
 }
- 
